@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+    {{ parent() }}
+<div class="container-fluid">
+    {% if cart | length > 0 %}
+        <table class="table">
+        <thead>
+        <tr>
+            <th>Image</th>
+            <th>Produit</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Total</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for produit in cart %}
+        <tr>
+            <td><img height="100" src="{{ produit.produit.image }}" /></td>
+            <td>{{ produit.produit.nom }}</td>
+            <td>{{ produit.produit.tarif }}</td>
+            <td>{{ produit.quantite}}</td>
+            <td>{{ produit.produit.tarif * produit.quantite}}</td>
+            <td><button class="btn btn-danger">Delete</button></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% else %}
+    <p>Panier vide</p>
+    {% endif %}
+
+    <div class="row col-4 offset-4 mt-5">
+        <button type="button" class="btn btn-success">Commandez</button>
+    </div>
+
+</div>
+{% endblock %}
